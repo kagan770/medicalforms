@@ -23,10 +23,8 @@ Ext.define('medicalForms.controller.Main', {
             patientInfo: 'patientinfo',
             medicalHistory: 'medicalhistory',
             privacy: 'privacy',
-            termsFoward: '#termsFoward',
-            termsBack: '#termsBack',
-            confirmBack: '#confirmBack',
-            confirmAndSave: '#confirmAndSave'
+            terms:'terms',
+           confirm:'confirm'
         },
         control: {
             patientInfo:{
@@ -44,12 +42,10 @@ Ext.define('medicalForms.controller.Main', {
                 backCommand: 'termsBack',
                 forwardCommand: 'termsFoward'
             },
-            confirmBack: {
-                tap: 'confirmBack'
-            },
-            confirmAndSave: {
-                tap: 'confirmAndSave'
-            }
+           confirm:{
+             backCommand: 'confirmBack',
+                confirmCommand: 'confirmAndSave'
+           }
         }
     },
     patientInfoFoward: function() {

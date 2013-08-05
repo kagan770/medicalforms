@@ -14,8 +14,7 @@
 //@require @packageOverrides
 
 //<debug>
-//Binyomin's comment
-//Gil comment
+
 Ext.Loader.setPath({
     'Ext': '../../touch/src',
     'Ux.field': 'ux'
