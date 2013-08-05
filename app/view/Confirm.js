@@ -26,9 +26,7 @@ Ext.define('medicalForms.view.Confirm', {
 		var titleBar = {
 			xtype: 'titlebar',
 			docked: 'top',
-			title: 'Confirm and Save (5for (var i = Things.length - 1; i >= 0; i--) {
-				Things[i]
-			};/5)',
+			title: 'Confirm and Save',
 			items: [backButton, confirmButton]
 		};
 
