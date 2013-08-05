@@ -29,7 +29,7 @@ Ext.define('medicalForms.view.Main', {
                 xtype: 'terms',
                 styleHtmlContent: true
             }, {
-                xtype: 'confirmCard',
+                xtype: 'confirm',
                 styleHtmlContent: true
             }
 
