@@ -1,35 +1,43 @@
 Ext.define('medicalForms.view.Confirm', {
 	extend: 'Ext.Panel',
-	xtype: 'confirmCard',
+	alias: 'widget.confirm',
 	config: {
-		title: 'Confirm',
-		id:'confirmCard',
-		items: [{
+		scrollable: 'vertical'
+	},
+	initialize: function() {
+
+		this.callParent(arguments);
+		var confirmButton = {
+			xtype: "button",
+			ui: "confirm",
+			text: "Confirm and Save",
+			align: 'right',
+			handler: this.onConfirmButtonTap,
+			scope: this
+		};
+		var backButton = {
+			xtype: "button",
+			ui: "back",
+			text: "Previous",
+			align: 'left',
+			handler: this.onBackButtonTap,
+			scope: this
+		};
+		var titleBar = {
 			xtype: 'titlebar',
 			docked: 'top',
-			title: 'Confirm (5/5)',
-			items: [{
-				xtype: 'button',
-				id: 'confirmBack',
-				name: 'confirmBack',
-				text: 'Previous',
-				ui:'back',
-				align: 'left'
-			},
-			{
-				xtype: 'button',
-				id: 'confirmAndSave',
-				name: 'confirmAndSave',
-				text: 'Confirm and Save',
-				ui:'confirm',
-				align: 'right'
-			}]
-		}
-		// ,
-		// {
-		// 	html:'Confirm the following information is correct',
-		// 	styleHtmlContent: true
-		// }
-		]
+			title: 'Confirm and Save (5for (var i = Things.length - 1; i >= 0; i--) {
+				Things[i]
+			};/5)',
+			items: [backButton, confirmButton]
+		};
+
+		this.add(titleBar);
+	},
+	onConfirmButtonTap: function() {
+		this.fireEvent("confirmCommand", this);
+	},
+	onBackButtonTap: function() {
+		this.fireEvent("backCommand", this);
 	}
 });
