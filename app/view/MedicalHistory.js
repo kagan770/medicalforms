@@ -115,8 +115,8 @@ Ext.define('medicalForms.view.MedicalHistory', {
 			value: 'Latex Allergy'
 		}, {
 			xtype: 'textareafield',
-			name: 'otherMedicalCondition',
-			id: 'otherMedicalCondition',
+			name: 'other',
+			id: 'other',
 			label: 'Other',
 			placeHolder: 'Please enter all other medical conditions',
 			maxRows: 5

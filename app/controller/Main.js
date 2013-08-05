@@ -26,7 +26,7 @@ Ext.define('medicalForms.controller.Main', {
             birthDate: "",
             height: "",
             weight: "",
-            refferalSource: [],
+            referralSource: [],
             medicalCondition: [],
             gender: "",
             procedure: "",
@@ -99,7 +99,7 @@ Ext.define('medicalForms.controller.Main', {
         record.set("birthDate", values.birthDate);
         record.set("height", values.height);
         record.set("weight", values.weight);
-        record.set("refferalSource", values.refferalSource);
+        record.set("referralSource", values.referralSource);
         record.set("medicalCondition", values.medicalCondition);
         record.set("gender", values.gender);
         record.set("procedure", values.procedure);
@@ -140,7 +140,7 @@ Ext.define('medicalForms.controller.Main', {
         $('input[name=birthDate]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=refferalSource]').parsley('addConstraint', {
+        $('input[name=referralSource]').parsley('addConstraint', {
             required: true
         });
         $('input[name=gender]').parsley('addConstraint', {
