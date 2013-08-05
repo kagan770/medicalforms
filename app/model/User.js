@@ -3,8 +3,9 @@ Ext.define('medicalForms.model.User', {
 
     config: {
         idProperty: 'id',
-        fields: [{
-            name: 'firstName', type: 'string'}, 
+        fields: [
+            {name:'id', type:'int'},
+            {name: 'firstName', type: 'string'}, 
             {name: 'lastName', type: 'string'}, 
             {name: 'todaysDate', type: 'date'}, 
             {name: 'address', type: 'string'}, 
@@ -20,10 +21,15 @@ Ext.define('medicalForms.model.User', {
             {name: 'birthDate', type: 'date'}, 
             {name: 'height', type: 'string'}, 
             {name: 'weight', type: 'integer'}, 
-            {name: 'refferalSource', type: 'string'}, 
+            {name: 'referralSource'}, 
             {name: 'medicalCondition'}, 
             {name: 'gender', type: 'string'}, 
-            {name: 'procedure', type: 'string'
-        }]
+            {name: 'procedure', type: 'string'},
+            {name: 'privacy', type: 'string'},
+            {name: 'agent', type: 'string'},
+            {name: 'title', type: 'string'},
+            {name: 'terms', type:'string'},
+            {name: 'confirm', type:'string'}
+        ]
     }
 });
