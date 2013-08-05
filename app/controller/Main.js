@@ -1,20 +1,44 @@
 Ext.define('medicalForms.controller.Main', {
     extend: 'Ext.app.Controller',
+    // Base Class functions.
     launch: function() {
+        this.callParent(arguments);
 
-        // this.callParent();
+        var now = new Date();
+        var userId = (now.getTime()).toString();
+        console.log('userId', userId);
+        Ext.getStore("Users").load();
+         var newUser = Ext.create("medicalForms.model.User", {
+            id: userId,
+            firstName: "",
+            lastName: "",
+            todaysDate: "",
+            address: "",
+            city: "",
+            state: "",
+            zipCode: "",
+            phoneNumber: "",
+            email: "",
+            other: "",
+            medications: "",
+            priorSurgeries: "",
+            drugAllergies: "",
+            birthDate: "",
+            height: "",
+            weight: "",
+            refferalSource: "",
+            medicalCondition: "",
+            gender: "",
+            procedure: ""
+        });
 
-        console.log("launch");
-
-
+        var patientInfoForm = this.getPatientInfo();
+        
+        patientInfoForm.setRecord(newUser);
     },
-
     init: function() {
-
-        // this.callParent();
-
+        this.callParent(arguments);
         console.log("init");
-
     },
 
     id: "myController",
@@ -23,39 +47,72 @@ Ext.define('medicalForms.controller.Main', {
             patientInfo: 'patientinfo',
             medicalHistory: 'medicalhistory',
             privacy: 'privacy',
-            terms:'terms',
-           confirm:'confirm'
+            terms: 'terms',
+            confirm: 'confirm'
         },
         control: {
-            patientInfo:{
+            patientInfo: {
                 forwardCommand: 'patientInfoFoward'
             },
-            medicalHistory:{
+            medicalHistory: {
                 backCommand: 'medicalHistoryBack',
                 forwardCommand: 'medicalHistoryFoward'
             },
-            privacy:{
+            privacy: {
                 backCommand: 'privacyBack',
                 forwardCommand: 'privacyFoward'
             },
-            terms:{
+            terms: {
                 backCommand: 'termsBack',
                 forwardCommand: 'termsFoward'
             },
-           confirm:{
-             backCommand: 'confirmBack',
+            confirm: {
+                backCommand: 'confirmBack',
                 confirmCommand: 'confirmAndSave'
-           }
+            }
         }
     },
     patientInfoFoward: function() {
         // alert("patientInfoFoward");
+        var newUser = Ext.create("medicalForms.model.User", {
+            firstName: "",
+            lastName: "",
+            todaysDate: "",
+            address: "",
+            city: "",
+            state: "",
+            zipCode: "",
+            phoneNumber: "",
+            email: "",
+            other: "",
+            medications: "",
+            priorSurgeries: "",
+            drugAllergies: "",
+            birthDate: "",
+            height: "",
+            weight: "",
+            refferalSource: "",
+            medicalCondition: "",
+            gender: "",
+            procedure: ""
+        });
+
         var patientInfoForm = this.getPatientInfo();
         console.log("patientInfoForm", patientInfoForm);
         var record = patientInfoForm.getRecord();
         console.log("record", record);
         var values = patientInfoForm.getValues();
         console.log("values", values);
+        var usersStore = Ext.getStore("Users");
+
+        record.set("firstName", values.firstName);
+
+        if (null == usersStore.findRecord('id', record.data.id)) {
+            usersStore.add(record);
+        }
+       
+        usersStore.sync();
+
         applyValidation();
         $('input[name=firstName]').parsley('addConstraint', {
             required: true
@@ -116,6 +173,7 @@ Ext.define('medicalForms.controller.Main', {
         });
     },
     privacyFoward: function() {
+
         var form = this.getPrivacy();
         console.log("form", form);
         var record = form.getRecord();
@@ -221,7 +279,7 @@ Ext.define('medicalForms.controller.Main', {
             gender: Ext.getCmp('gender').getValue(),
             procedure: Ext.getCmp('procedure').getValue(),
             referralSource: Ext.getCmp('referralSource').getValue(),
-            recieveSpecials: Ext.getCmp('revieveSpecials').getChecked()? 'yes' : 'no',
+            recieveSpecials: Ext.getCmp('revieveSpecials').getChecked() ? 'yes' : 'no',
             medicalCondition: Ext.getCmp('medicalHistoryForm').getValues().medicalCondition,
             otherMedicalCondition: Ext.getCmp('otherMedicalCondition').getValue(),
             priorSurgeries: Ext.getCmp('priorSurgeries').getValue(),
@@ -242,7 +300,7 @@ Ext.define('medicalForms.controller.Main', {
         });
 
     }
-    
+
 });
 
 function applyValidation() {
