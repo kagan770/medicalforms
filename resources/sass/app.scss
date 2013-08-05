@@ -1,0 +1,63 @@
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+                                                                             // is already included in your app.json file).
+$lightBrown:#FFE7C8;
+$brown:#F2D1BC;
+$darkBrown: #BE8D64;
+$lightBlue: #A4D6DC;
+$darkBlue: #91CDD5;
+$lightBrown: #FFE7C8;
+$base-color: $lightBlue;
+$active-color:$brown;
+$page-bg-color: $lightBrown;
+$alert-color: lighten($lightBlue, 50%);
+$bright-color: $lightBlue;
+$form-bg-color: $lightBrown;
+$form-label-background-color:black;
+$base-gradient: 'glossy';
+$confirm-color: $lightBrown;
+
+
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+// Custom code goes here..
+.x-form-label {
+    @include label();
+    @include bevel-text('light');
+    padding: $form-spacing;
+    /*background-color: $form-label-background-color;*/
+background-color: lighten($lightBlue, 10%);
+    span {
+        font-size: .8em;
+    }
+}
+.x-form-fieldset .x-form-label {
+  border-top-color: lighten($lightBlue, 10%);
+}
+.x-form-fieldset .x-field {
+  border-bottom-color: lighten($lightBlue, 20%);
+}
+
+.x-panel.x-floating,
+.x-msgbox,
+.x-form.x-floating {
+	@if $include-border-radius {
+		@include border-radius($panel-border-radius);
+	}
+	@include box-shadow(rgba(0,0,0,.8) 0 .2em .6em);
+	@include background-gradient($base-color, 'flat');
+
+	&.x-floating-light {
+		@include background-gradient($base-color, 'flat');
+	}
+
+	.x-panel-inner,
+	> .x-body {
+		@if $include-border-radius {
+			@include border_radius($panel-border-radius);
+		}
+	}
+}
+// Examples of using the icon mixin:
+// @include icon('user');
