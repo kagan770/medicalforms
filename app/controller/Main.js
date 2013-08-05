@@ -26,10 +26,15 @@ Ext.define('medicalForms.controller.Main', {
             birthDate: "",
             height: "",
             weight: "",
-            refferalSource: "",
-            medicalCondition: "",
+            refferalSource: [],
+            medicalCondition: [],
             gender: "",
-            procedure: ""
+            procedure: "",
+            privacy: "",
+            agent: "",
+            title: "",
+            terms: "",
+            confirm: ""
         });
 
         var patientInfoForm = this.getPatientInfo();
@@ -74,29 +79,6 @@ Ext.define('medicalForms.controller.Main', {
     },
     patientInfoFoward: function() {
         // alert("patientInfoFoward");
-        var newUser = Ext.create("medicalForms.model.User", {
-            firstName: "",
-            lastName: "",
-            todaysDate: "",
-            address: "",
-            city: "",
-            state: "",
-            zipCode: "",
-            phoneNumber: "",
-            email: "",
-            other: "",
-            medications: "",
-            priorSurgeries: "",
-            drugAllergies: "",
-            birthDate: "",
-            height: "",
-            weight: "",
-            refferalSource: "",
-            medicalCondition: "",
-            gender: "",
-            procedure: ""
-        });
-
         var patientInfoForm = this.getPatientInfo();
         console.log("patientInfoForm", patientInfoForm);
         var record = patientInfoForm.getRecord();
@@ -106,13 +88,30 @@ Ext.define('medicalForms.controller.Main', {
         var usersStore = Ext.getStore("Users");
 
         record.set("firstName", values.firstName);
+        record.set("lastName", values.lastName);
+        record.set("todaysDate", values.todaysDate);
+        record.set("address", values.address);
+        record.set("city", values.city);
+        record.set("state", values.state);
+        record.set("zipCode", values.zipCode);
+        record.set("phoneNumber", values.phoneNumber);
+        record.set("email", values.email);   
+        record.set("birthDate", values.birthDate);
+        record.set("height", values.height);
+        record.set("weight", values.weight);
+        record.set("refferalSource", values.refferalSource);
+        record.set("medicalCondition", values.medicalCondition);
+        record.set("gender", values.gender);
+        record.set("procedure", values.procedure);
+
 
         if (null == usersStore.findRecord('id', record.data.id)) {
             usersStore.add(record);
         }
        
         usersStore.sync();
-
+        var medicalHistoryForm = this.getMedicalHistory();
+        medicalHistoryForm.setRecord(record);
         applyValidation();
         $('input[name=firstName]').parsley('addConstraint', {
             required: true
@@ -162,15 +161,33 @@ Ext.define('medicalForms.controller.Main', {
             medicalForms.app.isValidated = true;
             Ext.Msg.alert("Please fix the required fields");
         }
-
     },
     medicalHistoryFoward: function() {
         // alert("medicalHistoryFoward");
+        var medicalHistoryForm = this.getMedicalHistory();
+        var record = medicalHistoryForm.getRecord();
+        var values = medicalHistoryForm.getValues();
+        console.log("record", record);
+        console.log("values", values);
+
+        record.set("medicalCondition", values.medicalCondition);
+        record.set("other", values.other);
+        record.set("medications", values.medications);
+        record.set("priorSurgeries", values.priorSurgeries);
+        record.set("drugAllergies", values.drugAllergies);
+
+
+        var usersStore = Ext.getStore("Users");
+
         Ext.getCmp('mainTabPanel').animateActiveItem(2, {
             type: 'slide',
             direction: 'left',
             duration: 500
         });
+
+        var PrivacyForm = this.getPrivacy();
+        PrivacyForm.setRecord(record);
+
     },
     privacyFoward: function() {
 
@@ -182,9 +199,9 @@ Ext.define('medicalForms.controller.Main', {
         console.log("values", values);
         // alert("privacyFoward");
         var accepted = values.acceptTerms;
-        var signed = Ext.getCmp("signatureField-privacy").getValue() ? true : false;
-        console.log("accepted: " + accepted + "signed: " + signed);
-        if (signed && accepted) {
+        var signature = Ext.getCmp("signatureField-privacy").getValue();
+        //console.log("accepted: " + accepted + "signed: " + signed);
+        if (signature && accepted) {
             Ext.getCmp('mainTabPanel').animateActiveItem(3, {
                 type: 'slide',
                 direction: 'left',
@@ -193,14 +210,21 @@ Ext.define('medicalForms.controller.Main', {
         } else {
             Ext.Msg.alert("Please accept and sign.");
         }
+        record.set("privacy", signature);
+        record.set("agent", values.agent);
+        record.set("title", values.title);
 
+        var TermsForm = this.getTerms();
+        TermsForm.setRecord(record);
     },
     termsFoward: function() {
         // alert("termsFoward");
+        var form = this.getTerms();
+        var record = form.getRecord();
         var accepted = Ext.getCmp("acceptTerms").getChecked();
-        var signed = Ext.getCmp("signatureField-terms").getValue() ? true : false;
-        console.log("accepted: " + accepted + "signed: " + signed);
-        if (signed && accepted) {
+        var signature = Ext.getCmp("signatureField-terms").getValue();
+        //console.log("accepted: " + accepted + "signed: " + signed);
+        if (signature && accepted) {
             Ext.getCmp('mainTabPanel').animateActiveItem(4, {
                 type: 'slide',
                 direction: 'left',
@@ -210,7 +234,7 @@ Ext.define('medicalForms.controller.Main', {
             Ext.Msg.alert("Please accept and sign.");
         }
 
-        var formValues = [];
+      /*  var formValues = [];
         // $.each(Ext.getCmp('patientInfoForm').getFieldsAsArray(), function(index, field) {
         //     var key = field.getName();
         //     var value = field.getValue();
@@ -230,6 +254,9 @@ Ext.define('medicalForms.controller.Main', {
 
         Ext.getCmp("confirmCard").setHtml(formValues.join("</br>"));
         console.log(formValues);
+*/
+        record.set("terms", signature);
+
     },
     medicalHistoryBack: function() {
         Ext.getCmp('mainTabPanel').animateActiveItem(0, {
