@@ -8,7 +8,7 @@
     in other places (such as Controllers). If Sencha Cmd cannot merge your
     changes and its generated code, it will produce a "merge conflict" that you
     will need to resolve manually.
-*/
+    */
 
 // DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
 //@require @packageOverrides
@@ -20,30 +20,32 @@ Ext.Loader.setPath({
     'Ux.field': 'ux'
 });
 //</debug>
- Ext.Loader.setConfig({ disableCaching: false });
+Ext.Loader.setConfig({ disableCaching: false });
 //</debug>
 Ext.application({
     name: 'medicalForms',
     isValidated:false,
     requires: [
-        'Ext.MessageBox',
-        'ux.signaturefield',
-        'Ux.field.Multiselect',
-        'Ext.form.*',
-        'Ext.field.*',
-        'Ext.Button',
-        'Ext.Toolbar',
-        'Ext.data.Store'    ],
+    'Ext.MessageBox',
+    'ux.signaturefield',
+    'Ux.field.Multiselect',
+    'Ext.form.*',
+    'Ext.field.*',
+    'Ext.Button',
+    'Ext.Toolbar',
+    'Ext.data.Store'    ],
     models:[
-        'User'
+    'User'
     ],
     views: [
-        'Main'
+    'Main'
     ],
     controllers:[
-        'Main'
+    'Main'
     ],
-
+    stores:[
+    'Users'
+    ],
     icon: {
         '57': 'resources/icons/Icon.png',
         '72': 'resources/icons/Icon~ipad.png',
@@ -80,6 +82,6 @@ Ext.application({
                     window.location.reload();
                 }
             }
-        );
+            );
     }
 });
