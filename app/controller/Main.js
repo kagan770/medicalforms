@@ -3,7 +3,7 @@ Ext.define('medicalForms.controller.Main', {
     // Base Class functions.
     launch: function() {
         this.callParent(arguments);
-
+        //New User instance
         var now = new Date();
         var userId = (now.getTime()).toString();
         console.log('userId', userId);
