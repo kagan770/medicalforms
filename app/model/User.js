@@ -30,6 +30,24 @@ Ext.define('medicalForms.model.User', {
             {name: 'title', type: 'string'},
             {name: 'terms', type:'string'},
             {name: 'confirm', type:'string'}
-        ]
+        ],
+         proxy: {
+            type: 'ajax',
+            url:'patients.php',
+            api: {
+                create: 'patients.php?act=createpatient',
+                read: 'patients.php?act=loadpatient',
+                update: 'patients.php?act=updatepatient',
+                destroy: 'patients.php?act=erasepatient'
+            }
+            // ,
+            // reader: {
+            //     type: 'json'
+            // }
+            // reader: {
+            //     rootProperty:'hotels'
+            // }
+        }
+
     }
 });

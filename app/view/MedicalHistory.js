@@ -32,87 +32,108 @@ Ext.define('medicalForms.view.MedicalHistory', {
 			[{
 			name: 'medicalCondition',
 			label: 'Asthma',
-			value: 'Asthma'
+			value: 'Asthma',
+			id: 'Asthma'
 		}, {
 			name: 'medicalCondition',
 			label: 'Bleeding Disorders',
-			value: 'Bleeding Disorders'
+			value: 'Bleeding Disorders',
+			id: 'Bleeding Disorders'
 		}, {
 			name: 'medicalCondition',
 			label: 'Bruise Easily',
-			value: 'Bruise Easily'
+			value: 'Bruise Easily',
+			id: 'Bruise Easily'
 		}, {
 			name: 'medicalCondition',
 			label: 'Cancer',
-			value: 'Cancer'
+			value: 'Cancer',
+			id: 'Cancer'
 		}, {
 			name: 'medicalCondition',
 			label: 'Convulsions/Seizures',
-			value: 'Convulsions/Seizures'
+			value: 'Convulsions/Seizures',
+			id: 'Convulsions/Seizures'
 		}, {
 			name: 'medicalCondition',
 			label: 'Diabetes/ Insolin',
-			value: 'Diabetes/ Insolin'
+			value: 'Diabetes/ Insolin',
+			id: 'Diabetes/ Insolin'
 		}, {
 			name: 'medicalCondition',
 			label: 'Dry Eyes',
-			value: 'Dry Eyes'
+			value: 'Dry Eyes',
+			id: 'Dry Eyes'
 		}, {
 			name: 'medicalCondition',
 			label: 'Fainting',
-			value: 'Fainting'
+			value: 'Fainting',
+			id: 'Fainting'
 		}, {
 			name: 'medicalCondition',
 			label: 'Glaucoma',
-			value: 'Glaucoma'
+			value: 'Glaucoma',
+			id: 'Glaucoma'
 		}, {
 			name: 'medicalCondition',
 			label: 'Heart Disease',
-			value: 'Heart Disease'
+			value: 'Heart Disease',
+			id: 'Heart Disease'
 		}, {
 			name: 'medicalCondition',
 			label: 'Hepatitis',
-			value: 'Hepatitis'
+			value: 'Hepatitis',
+			id: 'Hepatitis'
 		}, {
 			name: 'medicalCondition',
 			label: 'Herpes/Cold Sore/Fever Blister',
-			value: 'Herpes/Cold Sore/Fever Blister'
+			value: 'Herpes/Cold Sore/Fever Blister',
+			id: 'Herpes/Cold Sore/Fever Blister'
 		}, {
 			name: 'medicalCondition',
 			label: 'High Blood Pressure',
-			value: 'High Blood Pressure'
+			value: 'High Blood Pressure',
+			id: 'High Blood Pressure'
 		}, {
 			name: 'medicalCondition',
 			label: 'HIV/AIDS',
-			value: 'HIV/AIDS'
+			value: 'HIV/AIDS',
+			id: 'HIV/AIDS'
 		}, {
 			name: 'medicalCondition',
 			label: 'Kidney Disease',
-			value: 'Kidney Disease'
+			value: 'Kidney Disease',
+			id: 'Kidney Disease'
 		}, {
 			name: 'medicalCondition',
 			label: 'Lung Disease',
-			value: 'Lung Disease'
+			value: 'Lung Disease',
+			id: 'Lung Disease'
 		}, {
 			name: 'medicalCondition',
 			label: 'Lupus',
-			value: 'Lupus'
+			value: 'Lupus',
+			id: 'Lupus'
 		}, {
 			name: 'medicalCondition',
 			label: 'Smoker',
-			value: 'Smoker'
+			value: 'Smoker',
+			id: 'Smoker'
 		}, {
 			name: 'medicalCondition',
 			label: 'Steroid Use',
-			value: 'Steroid Use'
+			value: 'Steroid Use',
+			id: 'Steroid Use'
 		}, {
 			name: 'medicalCondition',
 			label: 'Thyroid Problems',
-			value: 'Thyroid Problems'
+			value: 'Thyroid Problems',
+			id: 'Thyroid Problems'
 		}, {
 			name: 'medicalCondition',
 			label: 'Latex Allergy',
-			value: 'Latex Allergy'
+			value: 'Latex Allergy',
+			id: 'Latex Allergy'
 		}, {
 			xtype: 'textareafield',
 			name: 'other',

@@ -1,5 +1,5 @@
 Ext.define('medicalForms.view.Confirm', {
-	extend: 'Ext.Panel',
+	extend: 'Ext.form.Panel',
 	alias: 'widget.confirm',
 	config: {
 		scrollable: 'vertical'
