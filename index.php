@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html manifest="" lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>medicalForms</title>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script id="microloader" type="text/javascript" src="../../touch/microloader/development.js"></script>
+</head>
+<body>
+</body>
+</html>
