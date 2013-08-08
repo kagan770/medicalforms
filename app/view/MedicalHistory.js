@@ -30,132 +30,111 @@ Ext.define('medicalForms.view.MedicalHistory', {
 		};
 		var formItems =
 			[{
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Asthma',
-			value: 'Asthma',
-			id: 'Asthma'
+			value: 'Asthma'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Bleeding Disorders',
-			value: 'Bleeding Disorders',
-			id: 'Bleeding Disorders'
+			value: 'Bleeding Disorders'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Bruise Easily',
-			value: 'Bruise Easily',
-			id: 'Bruise Easily'
+			value: 'Bruise Easily'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Cancer',
-			value: 'Cancer',
-			id: 'Cancer'
+			value: 'Cancer'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Convulsions/Seizures',
-			value: 'Convulsions/Seizures',
-			id: 'Convulsions/Seizures'
+			value: 'Convulsions/Seizures'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Diabetes/ Insolin',
-			value: 'Diabetes/ Insolin',
-			id: 'Diabetes/ Insolin'
+			value: 'Diabetes/ Insolin'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Dry Eyes',
-			value: 'Dry Eyes',
-			id: 'Dry Eyes'
+			value: 'Dry Eyes'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Fainting',
-			value: 'Fainting',
-			id: 'Fainting'
+			value: 'Fainting'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Glaucoma',
-			value: 'Glaucoma',
-			id: 'Glaucoma'
+			value: 'Glaucoma'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Heart Disease',
-			value: 'Heart Disease',
-			id: 'Heart Disease'
+			value: 'Heart Disease'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Hepatitis',
-			value: 'Hepatitis',
-			id: 'Hepatitis'
+			value: 'Hepatitis'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Herpes/Cold Sore/Fever Blister',
-			value: 'Herpes/Cold Sore/Fever Blister',
-			id: 'Herpes/Cold Sore/Fever Blister'
+			value: 'Herpes/Cold Sore/Fever Blister'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'High Blood Pressure',
-			value: 'High Blood Pressure',
-			id: 'High Blood Pressure'
+			value: 'High Blood Pressure'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'HIV/AIDS',
-			value: 'HIV/AIDS',
-			id: 'HIV/AIDS'
+			value: 'HIV/AIDS'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Kidney Disease',
-			value: 'Kidney Disease',
-			id: 'Kidney Disease'
+			value: 'Kidney Disease'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Lung Disease',
-			value: 'Lung Disease',
-			id: 'Lung Disease'
+			value: 'Lung Disease'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Lupus',
-			value: 'Lupus',
-			id: 'Lupus'
+			value: 'Lupus'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Smoker',
-			value: 'Smoker',
-			id: 'Smoker'
+			value: 'Smoker'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Steroid Use',
-			value: 'Steroid Use',
-			id: 'Steroid Use'
+			value: 'Steroid Use'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Thyroid Problems',
-			value: 'Thyroid Problems',
-			id: 'Thyroid Problems'
+			value: 'Thyroid Problems'
 		}, {
-			name: 'medicalCondition',
+			name: 'MedicalCondition',
 			label: 'Latex Allergy',
-			value: 'Latex Allergy',
-			id: 'Latex Allergy'
+			value: 'Latex Allergy'
 		}, {
 			xtype: 'textareafield',
-			name: 'other',
+			name: 'Other',
 			id: 'other',
 			label: 'Other',
 			placeHolder: 'Please enter all other medical conditions',
 			maxRows: 5
 		}, {
 			xtype: 'textareafield',
-			name: 'priorSurgeries',
+			name: 'PriorSurgeries',
 			id: 'priorSurgeries',
 			label: 'List All Prior Surgeries',
 			maxRows: 10
 		}, {
 			xtype: 'textareafield',
-			name: 'drugAllergies',
+			name: 'DrugAllergies',
 			id: 'drugAllergies',
 			label: 'List All Drug Allergies',
 			maxRows: 10
 		}, {
 			xtype: 'textareafield',
-			name: 'medications',
+			name: 'Medications',
 			id: 'medications',
 			label: 'List All Medications',
 			maxRows: 10

@@ -33,6 +33,7 @@ Ext.application({
     'Ext.field.*',
     'Ext.Button',
     'Ext.Toolbar',
+    'Ext.DataView',
     'Ext.data.Store'    ],
     models:[
     'User'

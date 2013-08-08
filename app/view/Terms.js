@@ -48,8 +48,8 @@ Ext.define('medicalForms.view.Terms', {
 		}];
 		var signatureField = [{
 			xtype: 'checkboxfield',
-			name: 'acceptTerms',
-			id: 'acceptTerms',
+			name: 'AcceptTerms',
+			id: 'AcceptTerms',
 			label: 'ACCEPTED AND AGREED',
 			value: 'true'
 		}, {

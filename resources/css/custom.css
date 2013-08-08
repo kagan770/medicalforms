@@ -1,16 +1,16 @@
 /* line 8, ../sass/custom.scss */
 .parsley-error {
-  /*color: #B94A48 !important;
+  color: #B94A48 !important;
   background-color: #F2DEDE !important;
   border: 1px solid #EED3D7 !important;
-  */
-  color: #c87100 !important;
+  
+  /*color: #c87100 !important;
   background-color: #fffdfb !important;
-  border: 1px solid #ffe7c8 !important;
+  border: 1px solid #ffe7c8 !important;*/
 }
 
-/*.parsley-success{
+.parsley-success{
 	color: #468847 !important;
 	background-color: #DFF0D8 !important;
 	border: 1px solid #D6E9C6 !important;
-}*/
+}

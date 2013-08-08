@@ -39,8 +39,12 @@
      *      }
      */
       "js": [
+        // {
+        //     "path": "http://cdn.sencha.io/touch/sencha-touch-2.2.0/sencha-touch-all.js",
+        //     "x-bootstrap": true
+        // },
         {
-            "path": "http://cdn.sencha.io/touch/sencha-touch-2.2.0/sencha-touch-all.js",
+            "path": "sencha-touch-all-debug.js",
             "x-bootstrap": true
         },
         {
@@ -57,7 +61,11 @@
         {
             "path": "parsley.extend.js",
             "x-bootstrap": true
+        },
+        {
+            "path":"//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.3.1/jquery.maskedinput.min.js"
         }
+
     ],
     // "js": [
     //     {

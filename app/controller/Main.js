@@ -1,53 +1,24 @@
 Ext.define('medicalForms.controller.Main', {
     extend: 'Ext.app.Controller',
     // Base Class functions.
-    launch: function() {
+    launch: function(id) {
+        console.log(id);
         this.callParent(arguments);
-        //New User instance
-        var now = new Date();
-        var userId = (now.getTime()).toString();
-        console.log('userId', userId);
-        Ext.getStore("Users").load();
-        var newUser = Ext.create("medicalForms.model.User", {
-            id: userId,
-            firstName: "",
-            lastName: "",
-            todaysDate: "",
-            address: "",
-            city: "",
-            state: "",
-            zipCode: "",
-            phoneNumber: "",
-            email: "",
-            other: "other ",
-            medications: "",
-            priorSurgeries: "",
-            drugAllergies: "",
-            birthDate: new Date(1980, 0, 1, 0, 0, 0, 0),
-            height: "",
-            weight: "",
-            referralSource: [],
-            medicalCondition: [],
-            gender: "",
-            procedure: "",
-            privacy: "",
-            agent: "",
-            title: "",
-            terms: "",
-            confirm: ""
-        });
 
-        var patientInfoForm = this.getPatientInfo();
 
-        patientInfoForm.setRecord(newUser);
+        $('input[name=ZipCode]').mask("99999");
+        $('input[name=PhoneNumber]').mask("(999) 999-9999");
     },
     init: function() {
         this.callParent(arguments);
-        console.log("init");
     },
 
     id: "myController",
     config: {
+        routes: {
+            'user/:id': 'savedPatientLaunch',
+            'newPatient': 'newPatientLaunch'
+        },
         refs: {
             patientInfo: 'patientinfo',
             medicalHistory: 'medicalhistory',
@@ -77,6 +48,59 @@ Ext.define('medicalForms.controller.Main', {
             }
         }
     },
+    newPatientLaunch: function() {
+        console.log("noid");
+        Ext.getStore("Users").load();
+        var patientInfoForm = this.getPatientInfo();
+        var newUser = Ext.create("medicalForms.model.User", {
+            Id: "",
+            FirstName: "",
+            LastName: "",
+            Address: "",
+            City: "",
+            State: "",
+            ZipCode: "",
+            PhoneNumber: "",
+            Email: "",
+            Other: "Other",
+            Medications: "",
+            PriorSurgeries: "",
+            DrugAllergies: "",
+            BirthDate: new Date(1980, 0, 1, 0, 0, 0, 0),
+            DisplayBirthDate: "",
+            Height: "",
+            Weight: "",
+            ReferralSource: [],
+            RecieveSpecials: false,
+            MedicalCondition: ["Asthma"],
+            Gender: "",
+            Procedure: "",
+            Privacy: "",
+            Agent: "",
+            Title: "",
+            Terms: "",
+            Confirm: ""
+        });
+        console.log("newUser", newUser);
+
+        patientInfoForm.setRecord(newUser);
+    },
+    savedPatientLaunch: function(id) {
+        console.log(id);
+        Ext.getStore("Users").load();
+        var patientInfoForm = this.getPatientInfo();
+        medicalForms.model.User.load(id, {
+            callback: function(response, operation) {
+                console.log("record", record);
+                var record = response;
+                record.set('MedicalCondition', record.get("MedicalCondition").split(","));
+                record.set('Other',"Other");
+                var newUser = Ext.create("medicalForms.model.User",record.getData());
+                console.log("newUser", newUser);
+                patientInfoForm.setRecord(newUser);
+            }
+        });
+    },
     patientInfoFoward: function() {
         // alert("patientInfoFoward");
         var patientInfoForm = this.getPatientInfo();
@@ -87,22 +111,23 @@ Ext.define('medicalForms.controller.Main', {
         console.log("values", values);
         var usersStore = Ext.getStore("Users");
 
-        record.set("firstName", values.firstName);
-        record.set("lastName", values.lastName);
-        record.set("todaysDate", values.todaysDate);
-        record.set("address", values.address);
-        record.set("city", values.city);
-        record.set("state", values.state);
-        record.set("zipCode", values.zipCode);
-        record.set("phoneNumber", values.phoneNumber);
-        record.set("email", values.email);
-        record.set("birthDate", values.birthDate);
-        record.set("height", values.height);
-        record.set("weight", values.weight);
-        record.set("referralSource", values.referralSource);
-        record.set("medicalCondition", values.medicalCondition);
-        record.set("gender", values.gender);
-        record.set("procedure", values.procedure);
+        record.set("FirstName", values.FirstName);
+        record.set("LastName", values.LastName);
+        record.set("Address", values.Address);
+        record.set("City", values.City);
+        record.set("State", values.State);
+        record.set("ZipCode", values.ZipCode);
+        record.set("PhoneNumber", values.PhoneNumber);
+        record.set("Email", values.Email);
+        record.set("BirthDate", values.BirthDate);
+        record.set("DisplayBirthDate", values.BirthDate.getMonth() + 1 + "/" + values.BirthDate.getDay() + "/" + values.BirthDate.getFullYear());
+        record.set("Height", values.Height);
+        record.set("Weight", values.Weight);
+        record.set("ReferralSource", values.ReferralSource);
+        record.set("RecieveSpecials", values.RecieveSpecials);
+        //record.set("MedicalCondition", values.medicalCondition);
+        record.set("Gender", values.Gender);
+        record.set("Procedure", values.Procedure);
 
 
         if (null == usersStore.findRecord('id', record.data.id)) {
@@ -118,61 +143,62 @@ Ext.define('medicalForms.controller.Main', {
         var medicalHistoryForm = this.getMedicalHistory();
         medicalHistoryForm.setRecord(record);
         applyValidation();
-        $('input[name=firstName]').parsley('addConstraint', {
+        $('input[name=FirstName]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=lastName]').parsley('addConstraint', {
+        $('input[name=LastName]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=address]').parsley('addConstraint', {
+        $('input[name=Address]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=city]').parsley('addConstraint', {
+        $('input[name=City]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=state]').parsley('addConstraint', {
+        $('input[name=State]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=zipCode]').parsley('addConstraint', {
+        $('input[name=ZipCode]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=phoneNumber]').parsley('addConstraint', {
+        $('input[name=PhoneNumber]').parsley('addConstraint', {
             required: true,
             type: 'phone'
         });
-        $('input[name=email]').parsley('addConstraint', {
+        $('input[name=Email]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=birthDate]').parsley('addConstraint', {
+        $('input[name=BirthDate]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=referralSource]').parsley('addConstraint', {
+        $('input[name=ReferralSource]').parsley('addConstraint', {
             required: true
         });
-        $('input[name=gender]').parsley('addConstraint', {
+        $('input[name=Gender]').parsley('addConstraint', {
             required: true,
             inlist: ["Male", "Female"]
         });
         //Doesn't work:
-        $('input[name=weight]').parsley('addConstraint', {
-            type: 'numeric'
-        });
-        $('input[name=procedure]').parsley('addConstraint', {
-            required: true
-        });
-        if ($('form').parsley('validate')) {
-            Ext.getCmp('mainTabPanel').animateActiveItem(1, {
-                type: 'slide',
-                direction: 'left',
-                duration: 500
-            });
-        } else {
-            $('form').parsley('validate');
-            medicalForms.app.isValidated = true;
-            Ext.Msg.alert("Please fix the required fields");
-        }
-    },
-    medicalHistoryFoward: function() {
+        // $('input[name=Weight]').parsley('addConstraint', {
+        //     type: 'numeric'
+        // });
+$('input[name=Procedure]').parsley('addConstraint', {
+    required: true
+});
+if ($('form').parsley('validate')) {
+    Ext.getCmp('mainTabPanel').animateActiveItem(1, {
+        type: 'slide',
+        direction: 'left',
+        duration: 500
+    });
+} else {
+    $('form').parsley('validate');
+    medicalForms.app.isValidated = true;
+    Ext.Msg.alert("Please fix the required fields");
+}
+},
+medicalHistoryFoward: function() {
+
         // alert("medicalHistoryFoward");
         var medicalHistoryForm = this.getMedicalHistory();
         var record = medicalHistoryForm.getRecord();
@@ -180,11 +206,13 @@ Ext.define('medicalForms.controller.Main', {
         console.log("record", record);
         console.log("values", values);
 
-        record.set("medicalCondition", values.medicalCondition);
-        record.set("other", values.other);
-        record.set("medications", values.medications);
-        record.set("priorSurgeries", values.priorSurgeries);
-        record.set("drugAllergies", values.drugAllergies);
+        record.set("MedicalCondition", values.MedicalCondition.filter(function(n) {
+            return n;
+        }));
+        record.set("Other", values.Other);
+        record.set("Medications", values.Medications);
+        record.set("PriorSurgeries", values.PriorSurgeries);
+        record.set("DrugAllergies", values.DrugAllergies);
 
 
         var usersStore = Ext.getStore("Users");
@@ -208,8 +236,11 @@ Ext.define('medicalForms.controller.Main', {
         var values = form.getValues();
         console.log("values", values);
         // alert("privacyFoward");
-        var accepted = values.acceptTerms;
+        var accepted = values.AcceptPrivacy;
         var signature = Ext.getCmp("signatureField-privacy").getValue();
+        console.log('accepted', accepted);
+        console.log('signature', signature);
+
         //console.log("accepted: " + accepted + "signed: " + signed);
         if (signature && accepted) {
             Ext.getCmp('mainTabPanel').animateActiveItem(3, {
@@ -220,9 +251,9 @@ Ext.define('medicalForms.controller.Main', {
         } else {
             Ext.Msg.alert("Please accept and sign.");
         }
-        record.set("privacy", signature);
-        record.set("agent", values.agent);
-        record.set("title", values.title);
+        record.set("Privacy", signature);
+        record.set("Agent", values.Agent);
+        record.set("Title", values.Title);
 
         var TermsForm = this.getTerms();
         TermsForm.setRecord(record);
@@ -231,7 +262,8 @@ Ext.define('medicalForms.controller.Main', {
         // alert("termsFoward");
         var form = this.getTerms();
         var record = form.getRecord();
-        var accepted = Ext.getCmp("acceptTerms").getChecked();
+        console.log("record", record);
+        var accepted = Ext.getCmp("AcceptTerms").getChecked();
         var signature = Ext.getCmp("signatureField-terms").getValue();
         //console.log("accepted: " + accepted + "signed: " + signed);
         if (signature && accepted) {
@@ -264,11 +296,10 @@ Ext.define('medicalForms.controller.Main', {
 
         Ext.getCmp("confirmCard").setHtml(formValues.join("</br>"));
         console.log(formValues);
-*/
-        record.set("terms", signature);
+        */
+        record.set("Terms", signature);
         var ConfirmationForm = this.getConfirm();
         ConfirmationForm.setRecord(record);
-
     },
     medicalHistoryBack: function() {
         Ext.getCmp('mainTabPanel').animateActiveItem(0, {
@@ -300,6 +331,7 @@ Ext.define('medicalForms.controller.Main', {
     },
     confirmAndSave: function() {
         var confirm = this.getConfirm();
+
         confirm.setMasked({
             xtype: 'loadmask',
             message: 'Saving...'

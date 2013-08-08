@@ -1,0 +1,2 @@
+erasepatient method = POST
+Request Body = {"drugAllergies":"","id":555,"lastName":"","todaysDate":null,"address":"","city":"","state":"","zipCode":"","phoneNumber":"","email":"","other":"other ","medications":"","priorSurgeries":"","firstName":"Bradley","birthDate":null,"height":"","weight":null,"referralSource":[],"medicalCondition":[],"gender":"","procedure":"","privacy":"","agent":"","title":"","terms":"","confirm":""}

@@ -1,6 +1,7 @@
 <?php 
 
 $action = $_GET['act'];
+$id = $_GET['id'];
 $data = json_decode(file_get_contents('php://input'));
 include_once 'mysql_connect.php';
 switch ($action) {
@@ -9,7 +10,7 @@ switch ($action) {
 	echo $id;
 	break;
 	case 'loadpatient':
-	echo loadpatient($con, $patientId);
+	echo loadpatient($con, $id);
 	break;
 	case 'updatepatient':
 	createpatient($con, $data);
@@ -24,40 +25,40 @@ switch ($action) {
 }
 
 function createpatient($con, $data){
-	$height = $data->height;
-	$weight = $data->weight;
-	$gender = $data->gender;
-	$procedure = $data->procedure;
-	$recieveSpecials = $data->recieveSpecials;
-	$signature = $data->signature;
-	$address = $data->address;
-	$agent = $data->agent;
-	$birthDate = date("m/d/Y", $data->birthDate);
-	$city = $data->city;
-	$confirm = $data->confirm;
-	$drugAllergies = $data->drugAllergies;
-	$email = $data->email;
-	$firstName = $data->firstName;
-	$gender = $data->gender;
-	$height = $data->height;
-	$id = $data->id;
-	$lastName = $data->lastName;
-	$medicalCondition = implode(",", $data->medicalCondition);
-	$medications = $data->medications;
-	$other = $data->other;
-	$phoneNumber = $data->phoneNumber;
-	$priorSurgeries = $data->priorSurgeries;
-	$signaturePrivacy = $data->privacy;
-	$procedure = $data->procedure;
-	$referralSource = implode(",", $data->referralSource);
-	$state = $data->state;
-	$signatureTerms = $data->terms;
-	$title = $data->title;
-	$todaysDate = $data->todaysDate;
-	$weight = $data->weight;
-	$zipCode = $data->zipCode;
+	$height = $data->Height;
+	$weight = $data->Weight;
+	$gender = $data->Gender;
+	$procedure = $data->Procedure;
+	$recieveSpecials = $data->RecieveSpecials;
+	$signature = $data->Signature;
+	$address = $data->Address;
+	$agent = $data->Agent;
+	$birthDate = date("m/d/Y", $data->BirthDate);
+	$city = $data->City;
+	$confirm = $data->Confirm;
+	$drugAllergies = $data->DrugAllergies;
+	$email = $data->Email;
+	$firstName = $data->FirstName;
+	$gender = $data->Gender;
+	$height = $data->Height;
+	$id = $data->Id;
+	$lastName = $data->LastName;
+	$medicalCondition = implode(",", $data->MedicalCondition);
+	$medications = $data->Medications;
+	$other = $data->Other;
+	$phoneNumber = $data->PhoneNumber;
+	$priorSurgeries = $data->PriorSurgeries;
+	$signaturePrivacy = $data->Privacy;
+	$procedure = $data->Procedure;
+	$referralSource = implode(",", $data->ReferralSource);
+	$state = $data->State;
+	$signatureTerms = $data->Terms;
+	$title = $data->Title;
+	$todaysDate = $data->TodaysDate;
+	$weight = $data->Weight;
+	$zipCode = $data->ZipCode;
 
-	$todaysDate = date("m/d/Y");
+	$todaysDate = date("m/d/Y g:i a");
 	$sql = sprintf("INSERT INTO  `Patient` (  
 	               `Id` ,
 	               `FirstName` ,
@@ -152,9 +153,18 @@ $result = mysqli_query($con,$sql);
 return mysqli_insert_id($con);
 }
 function loadpatient($con,$id){
-
+	$sql = sprintf("SELECT * FROM `Patient` WHERE id = %s", 
+	               mysqli_real_escape_string($con, $id));
+	//echo $sql;
+	$result = mysqli_query($con,$sql);
+	$my_array = array();
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+		$my_array[] = $row;
+	}	
+	return json_encode($my_array);
 }
-function updatepatient($con, $data){
+function updatepatient($con,
+ $data){
 	$height = $data->height;
 	$weight = $data->weight;
 	$gender = $data->gender;
@@ -191,34 +201,34 @@ function updatepatient($con, $data){
 	$todaysDate = date("m/d/Y");
 	$sql = sprintf("UPDATE  `Patient` 
 	               SET(  
-	               `FirstName` = '%s',
-	               `LastName` = '%s',
-	               `Address` = '%s',
-	               `City` = '%s',
-	               `State` = '%s',
-	               `ZipCode` = '%s',
-	               `PhoneNumber` = '%s',
-	               `Email` = '%s',
-	               `BirthDate` = '%s',
-	               `TodaysDate` = '%s',
-	               `Age` = '%s',
-	               `Height` = '%s',
-	               `Weight` = '%s',
-	               `Gender` = '%s',
-	               `Procedure` = '%s',
-	               `ReferralSource = '%s',
-	               `RecieveSpecials` = '%s',
-	               `DrugAllergies` = '%s',
-	               `Other` = '%s',
-	               `Medications` = '%s',
-	               `PriorSurgeries` = '%s',
-	               `MedicalCondition` = '%s',
-	               `Confirm` = '%s',
-	               `Agent` = '%s',
-	               `Title` = '%s',
-	               `SignaturePrivacy` = '%s',
-	               `SignatureTerms` = '%s',
-	               `PrintedStatus` = '%s') 
+	                   `FirstName` = '%s',
+	                   `LastName` = '%s',
+	                   `Address` = '%s',
+	                   `City` = '%s',
+	                   `State` = '%s',
+	                   `ZipCode` = '%s',
+	                   `PhoneNumber` = '%s',
+	                   `Email` = '%s',
+	                   `BirthDate` = '%s',
+	                   `TodaysDate` = '%s',
+	                   `Age` = '%s',
+	                   `Height` = '%s',
+	                   `Weight` = '%s',
+	                   `Gender` = '%s',
+	                   `Procedure` = '%s',
+	                   `ReferralSource = '%s',
+	                   `RecieveSpecials` = '%s',
+	                   `DrugAllergies` = '%s',
+	                   `Other` = '%s',
+	                   `Medications` = '%s',
+	                   `PriorSurgeries` = '%s',
+	                   `MedicalCondition` = '%s',
+	                   `Confirm` = '%s',
+	                   `Agent` = '%s',
+	                   `Title` = '%s',
+	                   `SignaturePrivacy` = '%s',
+	                   `SignatureTerms` = '%s',
+	                   `PrintedStatus` = '%s') 
 WHERE  `Id` = %s ",
 mysqli_real_escape_string($con, $firstName),
 mysqli_real_escape_string($con, $lastName),

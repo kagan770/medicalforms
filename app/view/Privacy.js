@@ -41,8 +41,8 @@ Ext.define('medicalForms.view.Privacy', {
 		}];
 		var signaturefield = [{
 			xtype: 'checkboxfield',
-			name: 'acceptTerms',
-			id: 'acceptTerms',
+			name: 'AcceptPrivacy',
+			id: 'AcceptPrivacy',
 			label: 'ACCEPTED AND AGREED',
 			value: 'true'
 		}, {
@@ -52,13 +52,13 @@ Ext.define('medicalForms.view.Privacy', {
 		}];
 		var agentField = [{
 			xtype: 'textfield',
-			name: 'agent',
+			name: 'Agent',
 			id: 'agent',
 			label: 'Agent',
 			placeHolder: 'Agent'
 		}, {
 			xtype: 'textfield',
-			name: 'title',
+			name: 'Title',
 			id: 'title',
 			label: 'Title',
 			placeHolder: 'Title'
