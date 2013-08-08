@@ -31,6 +31,9 @@ Ext.define('medicalForms.view.Main', {
             }, {
                 xtype: 'confirm',
                 styleHtmlContent: true
+            },
+            {
+                html:"<h1>Thank You</h1>"
             }
 
         ]

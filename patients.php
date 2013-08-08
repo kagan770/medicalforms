@@ -1,7 +1,7 @@
 <?php 
 
 $action = $_GET['act'];
-$id = $_GET['id'];
+$id = $_GET['Id'];
 $data = json_decode(file_get_contents('php://input'));
 include_once 'mysql_connect.php';
 switch ($action) {
@@ -25,6 +25,7 @@ switch ($action) {
 }
 
 function createpatient($con, $data){
+	$userId = $data->UserId;
 	$height = $data->Height;
 	$weight = $data->Weight;
 	$gender = $data->Gender;
@@ -61,6 +62,7 @@ function createpatient($con, $data){
 	$todaysDate = date("m/d/Y g:i a");
 	$sql = sprintf("INSERT INTO  `Patient` (  
 	               `Id` ,
+	               `UserId` , 
 	               `FirstName` ,
 	               `LastName` ,
 	               `Address` ,
@@ -118,8 +120,10 @@ VALUES (
         '%s',
         '%s',
         '%s',
+        '%s',
         '%s'
         )",
+mysqli_real_escape_string($con, $userId),
 mysqli_real_escape_string($con, $firstName),
 mysqli_real_escape_string($con, $lastName),
 mysqli_real_escape_string($con, $address),

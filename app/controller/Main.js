@@ -49,11 +49,13 @@ Ext.define('medicalForms.controller.Main', {
         }
     },
     newPatientLaunch: function() {
+        var MilliSecTime = (new Date()).getTime();
+        var RandomNum = (Math.floor(Math.random() * 100) + 1);
         console.log("noid");
         Ext.getStore("Users").load();
         var patientInfoForm = this.getPatientInfo();
         var newUser = Ext.create("medicalForms.model.User", {
-            Id: "",
+            UserId: MilliSecTime.toString() + RandomNum.toString(),
             FirstName: "",
             LastName: "",
             Address: "",
@@ -62,7 +64,7 @@ Ext.define('medicalForms.controller.Main', {
             ZipCode: "",
             PhoneNumber: "",
             Email: "",
-            Other: "Other",
+            Other: "",
             Medications: "",
             PriorSurgeries: "",
             DrugAllergies: "",
@@ -82,6 +84,7 @@ Ext.define('medicalForms.controller.Main', {
             Confirm: ""
         });
         console.log("newUser", newUser);
+        console.log("UserId", newUser.get("UserId"));
 
         patientInfoForm.setRecord(newUser);
     },
@@ -94,7 +97,6 @@ Ext.define('medicalForms.controller.Main', {
                 console.log("record", record);
                 var record = response;
                 record.set('MedicalCondition', record.get("MedicalCondition").split(","));
-                record.set('Other',"Other");
                 var newUser = Ext.create("medicalForms.model.User",record.getData());
                 console.log("newUser", newUser);
                 patientInfoForm.setRecord(newUser);
@@ -205,10 +207,12 @@ medicalHistoryFoward: function() {
         var values = medicalHistoryForm.getValues();
         console.log("record", record);
         console.log("values", values);
-
-        record.set("MedicalCondition", values.MedicalCondition.filter(function(n) {
-            return n;
-        }));
+        if(values.MedicalCondition)
+        {
+            record.set("MedicalCondition", values.MedicalCondition.filter(function(n) {
+                return n;
+            }));
+        }
         record.set("Other", values.Other);
         record.set("Medications", values.Medications);
         record.set("PriorSurgeries", values.PriorSurgeries);
@@ -249,7 +253,7 @@ medicalHistoryFoward: function() {
                 duration: 500
             });
         } else {
-            Ext.Msg.alert("Please accept and sign.");
+            Ext.Msg.alert("Please accept the privacy notice.");
         }
         record.set("Privacy", signature);
         record.set("Agent", values.Agent);
@@ -273,7 +277,7 @@ medicalHistoryFoward: function() {
                 duration: 500
             });
         } else {
-            Ext.Msg.alert("Please accept and sign.");
+            Ext.Msg.alert("Please accept the terms.");
         }
 
         /*  var formValues = [];
@@ -337,12 +341,17 @@ medicalHistoryFoward: function() {
             message: 'Saving...'
         });
         var form = this.getTerms();
-        var id = form.getRecord().data.id;
+        var id = form.getRecord().data.Id;
         var store = Ext.getStore("Users");
         var patient = store.getById(id);
         patient.save({
             success: function() {
                 confirm.setMasked(false);
+                Ext.getCmp('mainTabPanel').animateActiveItem(5, {
+                    type: 'slide',
+                    direction: 'left',
+                    duration: 500
+                });
             }
         });
     }
