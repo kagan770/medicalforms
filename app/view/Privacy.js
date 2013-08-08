@@ -48,7 +48,10 @@ Ext.define('medicalForms.view.Privacy', {
 		}, {
 			xtype: 'signaturefield',
 			id: 'signatureField-privacy',
-			label: 'Enter Signature'
+			label: 'Enter Signature',
+			sigWidth: 550,
+			sigHeight: 200,
+			labelWidth: '150px'
 		}];
 		var agentField = [{
 			xtype: 'textfield',
@@ -64,15 +67,21 @@ Ext.define('medicalForms.view.Privacy', {
 			placeHolder: 'Title'
 		}];
 		this.add([].concat(
-			titleBar, html, {
-				xtype: 'fieldset',
-				items: signaturefield
-			}, {
-				xtype: 'fieldset',
-				title: 'If patient is under the age of 18',
-				items: agentField
-			}
-		));
+		         titleBar, html, {
+		         	xtype: 'fieldset',
+		         	defaults:{
+		         		labelWidth: '150px'
+		         	},
+		         	items: signaturefield
+		         }, {
+		         	xtype: 'fieldset',
+		         	defaults:{
+		         		labelWidth: '150px'
+		         	},
+		         	title: 'If patient is under the age of 18',
+		         	items: agentField
+		         }
+		         ));
 	},
 	onForwardButtonTap: function() {
 		console.log("next");

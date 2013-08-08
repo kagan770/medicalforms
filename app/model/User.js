@@ -2,8 +2,9 @@ Ext.define('medicalForms.model.User', {
     extend: 'Ext.data.Model',
 
     config: {
-        idProperty: 'UserId',
+        idProperty: 'Id',
         fields: [
+            {name: 'Id', type:'int'},
             {name: 'UserId', type:'string'},
             {name: 'FirstName', type: 'string'}, 
             {name: 'LastName', type: 'string'}, 
@@ -32,7 +33,7 @@ Ext.define('medicalForms.model.User', {
             {name: 'Terms', type:'string'},
             {name: 'Confirm', type:'string'}
         ],
-         proxy: {
+        proxy: {
             type: 'ajax',
             url:'patients.php',
             api: {
@@ -52,9 +53,9 @@ Ext.define('medicalForms.model.User', {
 
     },
     removeNulls:function(){
-         var medicalCondition = this.get('medicalCondition');
-            
+       var medicalCondition = this.get('medicalCondition');
+       
 
-        this.set('medicalCondition', medicalCondition.join('---'));
-    }
+       this.set('medicalCondition', medicalCondition.join('---'));
+   }
 });

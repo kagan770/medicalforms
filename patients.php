@@ -1,7 +1,7 @@
 <?php 
 
 $action = $_GET['act'];
-$id = $_GET['id'];
+$id = $_GET['Id'];
 $data = json_decode(file_get_contents('php://input'));
 include_once 'mysql_connect.php';
 switch ($action) {

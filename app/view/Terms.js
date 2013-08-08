@@ -51,11 +51,15 @@ Ext.define('medicalForms.view.Terms', {
 			name: 'AcceptTerms',
 			id: 'AcceptTerms',
 			label: 'ACCEPTED AND AGREED',
-			value: 'true'
+			value: 'true',
+			labelWidth: '150px'
 		}, {
 			xtype: 'signaturefield',
 			id: 'signatureField-terms',
-			label: 'Enter Signature'
+			label: 'Enter Signature',
+			sigWidth: 550,
+			sigHeight: 200,
+			labelWidth: '150px'
 		}];
 		
 		this.add([].concat(

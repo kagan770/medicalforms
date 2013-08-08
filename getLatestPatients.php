@@ -20,19 +20,28 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.1/select2.min.css">
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="span12">
-				<button class="btn btn-large">New Patient</button>
+				<h2 style="text-align:center">Michigan Cosmetic Surgery Center Intake Form</h2>
 			</div>
-			<div class="span12">
+			<div class="span12" style="text-align:center">
+				<a class="btn btn-large" href="http://parallelable.com/medicalForms/#newPatient/">New Patient >></a>
+			</div>
+			<div class="span12" style="text-align:center">
+				<h4>Or Existing Patient:</h4>
 				<select data-bind="
 				options:patients, 
 				optionsText:'DisplayName', 
-				optionsValue:'Id'"></select>
+				optionsValue:'Id',
+				value:patientId" sytle="width:250px"></select>
+			</div>
+			<div class="span12" style="text-align:center; margin-top:15px;">
+				<a class="btn btn-large" data-bind="attr:{href:existingPatientURL}">Extisting Patient >></a>
 			</div>
 		</div>
 	</div>
@@ -58,13 +67,21 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 		patient.DisplayName = fullName + " " + age + "yrs old";
 
 	});
+	patients.unshift({Id:"-1", DisplayName: '--Please Select an Existing Patient--'})
 	function viewModel(patients){
-		this.patients = ko.observableArray(patients);
+		var self = this;
+		self.patients = ko.observableArray(patients);
+		self.patientId = ko.observable();
+		self.existingPatientURL = ko.computed(function(){
+			return "http://parallelable.com/medicalForms/#user/" + self.patientId();
+		});
 	}
 	$(function(){
 		vm = new viewModel(patients);
 		ko.applyBindings(vm);
-		$('select').select2();
+		$('select').select2({
+			width:'275px'
+		});
 	});
 	
 	console.log(patients);
