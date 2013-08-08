@@ -22,49 +22,49 @@ Ext.define('medicalForms.view.PatientInfo', {
 			items: [nextButton]
 		};
 		var formItems = [{
-			name: 'firstName',
+			name: 'FirstName',
 			id: 'firstName',
 			label: 'First Name',
 			placeHolder: 'First Name'
 		}, {
-			name: 'lastName',
+			name: 'LastName',
 			id: 'lastName',
 			label: 'Last Name',
 			placeHolder: 'Last Name'
 		}, {
-			name: 'address',
+			name: 'Address',
 			id: 'address',
 			label: 'Address',
 			placeHolder: 'Address'
 		}, {
-			name: 'city',
+			name: 'City',
 			id: 'city',
 			label: 'City',
 			placeHolder: 'City'
 		}, {
-			name: 'state',
+			name: 'State',
 			id: 'state',
 			label: 'State',
 			placeHolder: 'State'
 		}, {
-			name: 'zipCode',
+			name: 'ZipCode',
 			id: 'zipCode',
 			label: 'Zip Code',
 			placeHolder: 'Zip Code'
 		}, {
-			name: 'phoneNumber',
+			name: 'PhoneNumber',
 			id: 'phoneNumber',
 			label: 'Phone Number',
-			placeHolder: 'Please enter the best phone number for us to contact you'
+			placeHolder: 'Phone Number'
 		}, {
 			xtype: 'emailfield',
-			name: 'email',
+			name: 'Email',
 			id: 'email',
 			label: 'Email',
 			placeHolder: 'Email Address'
 		}, {
 			xtype: 'datepickerfield',
-			name: 'birthDate',
+			name: 'BirthDate',
 			id: 'birthDate',
 			label: 'Date Of Birth',
 			placeHolder: 'Date of Birth',
@@ -80,7 +80,7 @@ Ext.define('medicalForms.view.PatientInfo', {
 				}
 			}
 		}, {
-			name: 'height',
+			name: 'Height',
 			xtype:'selectfield',
 			id: 'height',
 			label: 'Height',
@@ -99,14 +99,13 @@ Ext.define('medicalForms.view.PatientInfo', {
 							array.push({text: heightStr, value:heightStr});
 						});
 					});
-					console.log(JSON.stringify(array));
 					return array;
 				})()
 				
             
 		}, {
 			xtype: 'numberfield',
-			name: 'weight',
+			name: 'Weight',
 			id: 'weight',
 			label: 'Weight (lbs)',
 			minValue: 1,
@@ -115,7 +114,7 @@ Ext.define('medicalForms.view.PatientInfo', {
 			placeHolder: 'Weight'
 		}, {
 			xtype: 'selectfield',
-			name: 'gender',
+			name: 'Gender',
 			id: 'gender',
 			label: 'Gender',
 			autoSelect: false,
@@ -143,13 +142,13 @@ Ext.define('medicalForms.view.PatientInfo', {
 				}
 			}
 		}, {
-			name: 'procedure',
+			name: 'Procedure',
 			id: 'procedure',
 			label: 'Consulting for what procedure',
 			placeHolder: 'What procedure are you here for?'
 		}, {
 			xtype: 'multiselectfield',
-			name: 'referralSource',
+			name: 'ReferralSource',
 			id: 'referralSource',
 			label: 'How did you hear about us?',
 			delimiter: ',',
@@ -187,10 +186,10 @@ Ext.define('medicalForms.view.PatientInfo', {
 			}]
 		}, {
 			xtype: 'checkboxfield',
-			name: 'revieveSpecials',
-			id: 'revieveSpecials',
+			name: 'RecieveSpecials',
+			id: 'recieveSpecials',
 			label: 'I Would Like to Reviece Specials',
-			value: 'true',
+			//value: 'true',
 			required: false
 		}];
 
