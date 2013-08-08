@@ -31,6 +31,13 @@ Ext.define('medicalForms.view.Main', {
             }, {
                 xtype: 'confirm',
                 styleHtmlContent: true
+            }, {
+                xtype: 'panel',
+                items: {
+                xtype: 'titlebar',
+                docked: 'top',
+                title: 'Thank You'
+                }
             }
 
         ]

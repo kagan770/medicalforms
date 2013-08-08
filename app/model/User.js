@@ -2,9 +2,9 @@ Ext.define('medicalForms.model.User', {
     extend: 'Ext.data.Model',
 
     config: {
-        idProperty: 'id',
+        idProperty: 'UserId',
         fields: [
-            {name: 'Id', type:'int'},
+            {name: 'UserId', type:'string'},
             {name: 'FirstName', type: 'string'}, 
             {name: 'LastName', type: 'string'}, 
             {name: 'Address', type: 'string'}, 
