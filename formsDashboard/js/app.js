@@ -22,34 +22,68 @@
      null,
      null,
      null,
+     null,
      null
      ]
  };
 
  function getPatients(callback) {
+
      $.ajax({
          url: 'getPatients.php',
          type: 'post',
          dataType: "json",
          success: function(patients) {
-            $.each(patients, function(index, patient){
-                patient.Age = getAge(patient.BirthDate);
+
+            getAttachments("", function(attachments){
+
+                console.log('attachments',attachments);
+                $.each(patients, function(i, patient){
+                    patient.Attachments = [];
+                    console.log("patients", patient);
+                    $.each(attachments, function(j, attachment){
+                        if(attachment.UserId == patient.UserId){
+                            patient.Attachments.push(attachment);
+                        }
+                    });
+
+                    patient.Age = getAge(patient.BirthDate);
+
+                    if(patient.PrintedStatus){
+                        patient.PrintedStatus = JSON.parse(patient.PrintedStatus);
+                    }
+                });
+
+                callback(patients);
             });
-            callback(patients);
         }
 
     });
  }
 
- function getNumPatients(callback) {
-     $.ajax({
-         url: 'getNumPatients.php',
-         success: function(response) {
-             callback(response);
-         }
-     });
- }
- function renderDataTable(tableOptions){
+ function getAttachments(patientId, callback){
+
+
+    $.ajax({
+        url: 'getAttachments.php',
+        data: 'id=' + patientId,
+        dataType: 'JSON',
+        success: function(response) {
+            console.log("getAttachments");
+            callback(response);
+        }
+    });
+}
+
+function getNumPatients(callback) {
+ $.ajax({
+     url: 'getNumPatients.php',
+     success: function(response) {
+         callback(response);
+     }
+ });
+}
+function renderDataTable(tableOptions){
     $("table").dataTable(tableOptions);
     $("[id^=fileupload]").ajaxForm({
         success:function(response){
@@ -63,13 +97,18 @@
     });
     $(".printed_status").change(function(){
         var status = $(this).is(':checked');
-        var userId = $(this).parent().parent("tr").attr("id");
-        changePrintedStatus(userId, status);
+        var id = $(this).parent().parent("tr").attr("id");
+        changePrintedStatus(id, status);
     });
 }
-function changePrintedStatus(userId, status){
-    //TODO:
-    console.log('userId', userId);
+function changePrintedStatus(id, status){
+    $.ajax({
+        url:"http://parallelable.com/medicalForms/patients.php?act=updatepatient", 
+        type:'post', 
+        data:'{"Id": ' + id + ', "PrintedStatus":  ' + status + ' }', 
+        contentType: 'application/json'
+    });
+    console.log('userId', id);
     console.log('status', status);
 
 }
