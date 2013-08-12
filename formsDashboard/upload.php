@@ -2,7 +2,8 @@
 $output_dir = "uploads/";
 $label = $_FILES["myfile"]["name"];
 $userId = $_POST['UserId'];
-
+$date = date("U");
+$fileName = $date.$label;
 if(isset($_FILES["myfile"]))
 {
     //Filter the file types , if you want.
@@ -13,7 +14,7 @@ if(isset($_FILES["myfile"]))
     else
     {
         //move the uploaded file to uploads folder;
-        move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir. $_FILES["myfile"]["name"]);
+        move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir. $fileName);
  
      echo "Uploaded File :".$output_dir. $_FILES["myfile"]["name"];
     }
@@ -25,6 +26,9 @@ $data = json_decode(file_get_contents('php://input'));
 include_once '../mysql_connect.php';
 function createattachment($con, $userId, $label){
 	$date = date("U");
+	// $userId = $data['userId'];
+	// echo $userId;
+	// $label = $data['label'];
 	$filename = $date.$label;
 
 	$sql = sprintf("INSERT INTO  `attachment` (  
