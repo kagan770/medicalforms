@@ -2,8 +2,8 @@
 <head>
 	<title></title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
-	<link href="stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
 
+	<link href="stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
 	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
 	<meta charset="utf-8">
 	<!-- Always force latest IE rendering engine or request Chrome Frame -->
@@ -13,16 +13,34 @@
     td, th{
         white-space: nowrap;
     }
-    table.datatable tr.even:hover,
-    table.datatable tr.odd:hover
-    {
-        background: #6db5d5;
-        cursor: pointer;
+    form.upload {
+        width: 85px;
+        height: 30px;
+        background: url('images/upload_button.jpg');
+        overflow: hidden;
+        background-size: 100% 100%;
+        cursor:pointer;
+    }
+
+    form.upload input {
+        display: block !important;
+        width: 85px !important;
+        height: 30px !important;
+        opacity: 0 !important;
+        overflow: hidden !important;
+        background-size: 100% 100%;
+        cursor:pointer;
+    }
+    #preloader{
+        position: fixed;
+        z-index: 100;
+        top: 40%;
+        left:50%;
     }
     </style>
 </head>
 <body>
-   <div class="main-content" style="margin-left: 0">
+ <div class="main-content" style="margin-left: 0">
     <div class="container-fluid padded">
         <div class="row-fluid">
 
@@ -36,6 +54,7 @@
             </div>
         </div>
     </div>
+    <div id="preloader"></div>
     <div class="container-fluid padded">
         <div class="row-fluid">
             <div class="span12">
@@ -53,6 +72,7 @@
                             <th>Phone Number</th>
                             <th>Procedure</th>
                             <th>Attachments</th>
+                            <th>Attach</th>
                             <th>Printed</th>
                             <th>Report</th>
                         </tr>
@@ -71,45 +91,37 @@
                             <td data-bind="text: PhoneNumber"></td>
                             <td data-bind="text: Procedure"></td>
                             <td>
-                                <form data-bind="attr:{'id':'fileupload' + $index()}" class="fileupload" action="upload.php" method="post" enctype="multipart/form-data">
-                                   <input type="file" name="myfile">
-                                   <!-- <input type="submit" value="Ajax File Upload"> -->
-                                   <input type="hidden" name="UserId" data-bind="value:UserId"/>
-                               </form>
-                           </td>
-                           <td><input type="checkbox" class="printed_status" data-bind="value:PrintedStatus"></td>
-                           <td><a class="btn btn-red" data-bind="attr:{'href':'print_patient.php?id=' + Id}">Report</a></td>
-                       </tr>
-                   </tbody>
-               </table>
-           </div>
-       </div>
-   </div>
-</div>
-<style>
-#fileupload { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
-#progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
-#bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
-#percent { position:absolute; display:inline-block; top:3px; left:48%; }
-</style>
-<form id="fileupload" action="upload.php" method="post" enctype="multipart/form-data">
-   <input type="file" name="myfile">
-   <input type="submit" value="Ajax File Upload">
-</form>
-<div id="progress">
-    <div id="bar"></div>
-    <div id="percent">0%</div >
-    </div>
-    <br/>
+                                <!-- ko foreach:Attachments -->
+                                <a data-bind="text: Label, attr: { href: 'http://www.parallelable.com/medicalForms/formsDashboard/uploads/' + Filename, title: Label }"></a>
+                                <!-- /ko -->
+                            </td>
+                            <td>
 
-    <div id="message"></div>
-    <!-- <textarea data-bind="text:ko.toJSON($root)"></textarea> -->
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.1/knockout-min.js" ></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js" ></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-    <script type="text/javascript" src="js/viewModel.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+                                <form data-bind="attr:{'id':'fileupload' + $index()}" class="fileupload upload" action="upload.php" method="post" enctype="multipart/form-data">
+                                 <input type="file" name="myfile">
+                                 <!-- <input type="file" name="myfile"> -->
+                                 <!-- <input type="submit" value="Ajax File Upload"> -->
+                                 <input type="hidden" name="UserId" data-bind="value:UserId"/>
+                             </form>
+                         </td>
+                         <td><input type="checkbox" class="printed_status" data-bind="checked:PrintedStatus"></td>
+                         <td><a class="btn btn-red" data-bind="attr:{'href':'print_patient.php?id=' + Id}">Report</a></td>
+                     </tr>
+                 </tbody>
+             </table>
+         </div>
+     </div>
+ </div>
+</div>
+
+<!-- <textarea data-bind="text:ko.toJSON($root)"></textarea> -->
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/knockout/2.2.1/knockout-min.js" ></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
+<script type="text/javascript" src="js/viewModel.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

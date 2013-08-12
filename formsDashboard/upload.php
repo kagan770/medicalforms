@@ -1,7 +1,8 @@
 <?php
-//upload.php
 $output_dir = "uploads/";
-echo $_POST['UserId'];
+$label = $_FILES["myfile"]["name"];
+$userId = $_POST['UserId'];
+
 if(isset($_FILES["myfile"]))
 {
     //Filter the file types , if you want.
@@ -18,4 +19,32 @@ if(isset($_FILES["myfile"]))
     }
  
 }
+
+//Insert row for file in db
+$data = json_decode(file_get_contents('php://input'));
+include_once '../mysql_connect.php';
+function createattachment($con, $userId, $label){
+	$date = date("U");
+	$filename = $date.$label;
+
+	$sql = sprintf("INSERT INTO  `attachment` (  
+	               `UserId` , 
+	               `Label`,
+	               `Filename`
+	               ) 
+	VALUES (
+        '%s',
+        '%s',
+        '%s'
+        )",
+	mysqli_real_escape_string($con, $userId),
+	mysqli_real_escape_string($con, $label),
+	mysqli_real_escape_string($con, $filename));
+	echo $sql;
+	mysqli_query($con, $sql);
+
+}
+
+createattachment($con, $userId, $label);
+mysqli_close($con);
 ?>

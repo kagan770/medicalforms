@@ -39,7 +39,7 @@ Ext.define('medicalForms.model.User', {
             api: {
                 create: 'patients.php?act=createpatient',
                 read: 'patients.php?act=loadpatient',
-                update: 'patients.php?act=updatepatient',
+                update: 'patients.php?act=createpatient',
                 destroy: 'patients.php?act=erasepatient'
             },
             // ,
