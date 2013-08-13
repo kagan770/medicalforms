@@ -40,7 +40,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 				optionsValue:'Id',
 				value:patientId" sytle="width:250px"></select>
 			</div>
-			<div class="span12" style="text-align:center; margin-top:15px;">
+			<div class="span12" data-bind="visible:patientId() != '-1'" style="text-align:center; margin-top:15px;">
 				<a class="btn btn-large" data-bind="attr:{href:existingPatientURL}">Extisting Patient >></a>
 			</div>
 		</div>

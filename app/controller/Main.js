@@ -8,9 +8,11 @@ Ext.define('medicalForms.controller.Main', {
 
         $('input[name=ZipCode]').mask("99999");
         $('input[name=PhoneNumber]').mask("(999) 999-9999");
+        window.history.forward();
     },
     init: function() {
         this.callParent(arguments);
+
     },
 
     id: "myController",

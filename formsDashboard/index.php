@@ -34,13 +34,27 @@
     #preloader{
         position: fixed;
         z-index: 100;
-        top: 40%;
-        left:50%;
+        /*top: 40%;
+        left:50%;*/
+        top: 0;
+        left:0;
+        background: #333;
+        color: #fff;
+        width: 100%;
+        height: 100%;
+        display:none;
+        opacity:0.7;
+    }
+    .attachments, .attachments a{
+        white-space: normal;
+        font-size:12px;
+        color:#0064CC;
+        text-decoration: underline;
     }
     </style>
 </head>
 <body>
- <div class="main-content" style="margin-left: 0">
+   <div class="main-content" style="margin-left: 0">
     <div class="container-fluid padded">
         <div class="row-fluid">
 
@@ -73,8 +87,9 @@
                             <th>Procedure</th>
                             <th>Attachments</th>
                             <th>Attach</th>
-                            <th>Printed</th>
                             <th>Report</th>
+                            <th>Printed</th>
+
                         </tr>
                     </thead>
                     <tbody data-bind="foreach:patients">
@@ -90,28 +105,32 @@
                             <td data-bind="text: Gender"></td>
                             <td data-bind="text: PhoneNumber"></td>
                             <td data-bind="text: Procedure"></td>
-                            <td>
+                            <td class="attachments">
                                 <!-- ko foreach:Attachments -->
+                                <!-- ko if:$index() > 0 -->
+                                , 
+                                <!-- /ko -->
                                 <a data-bind="text: Label, attr: { href: 'http://www.parallelable.com/medicalForms/formsDashboard/uploads/' + Filename, title: Label }"></a>
                                 <!-- /ko -->
                             </td>
                             <td>
 
                                 <form data-bind="attr:{'id':'fileupload' + $index()}" class="fileupload upload" action="upload.php" method="post" enctype="multipart/form-data">
-                                 <input type="file" name="myfile">
-                                 <!-- <input type="file" name="myfile"> -->
-                                 <!-- <input type="submit" value="Ajax File Upload"> -->
-                                 <input type="hidden" name="UserId" data-bind="value:UserId"/>
-                             </form>
-                         </td>
-                         <td><input type="checkbox" class="printed_status" data-bind="checked:PrintedStatus"></td>
-                         <td><a class="btn btn-red" data-bind="attr:{'href':'print_patient.php?id=' + Id}">Report</a></td>
-                     </tr>
-                 </tbody>
-             </table>
-         </div>
-     </div>
- </div>
+                                   <input type="file" name="myfile">
+                                   <!-- <input type="file" name="myfile"> -->
+                                   <!-- <input type="submit" value="Ajax File Upload"> -->
+                                   <input type="hidden" name="UserId" data-bind="value:UserId"/>
+                               </form>
+                           </td>
+                           <td><a class="btn btn-red" data-bind="attr:{'href':'print_patient.php?id=' + Id}"><i class="icon-list-ul"></i>&nbsp;Report</a></td>
+                           <td><input type="checkbox" class="printed_status" data-bind="checked:PrintedStatus"></td>
+
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
 </div>
 
 <!-- <textarea data-bind="text:ko.toJSON($root)"></textarea> -->

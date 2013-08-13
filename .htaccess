@@ -1,0 +1,6 @@
+AuthName "Secure Area"
+AuthType Basic
+AuthUserFile /homepages/38/d90108673/htdocs/parallelable/medicalForms/.htpasswd
+require valid-user
+ExpiresActive On
+ExpiresDefault "access"
